@@ -309,6 +309,29 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="21-&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x5206;&#x7C7B;">2.1 &#x903B;&#x8F91;&#x56DE;&#x5F52;&#x5206;&#x7C7B;</h1>
+<p>&#x6709;&#x7A7A;&#x770B;&#x770B;python&#x505A;&#x6587;&#x672C;&#x5206;&#x7C7B;&#x7684;&#x4EE3;&#x7801;
+<a href="https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/" target="_blank">https://www.analyticsvidhya.com/blog/2018/04/a-comprehensive-guide-to-understand-and-implement-text-classification-in-python/</a></p>
+<h2 id="&#x5BF9;&#x4E8E;tfidf">&#x5BF9;&#x4E8E;tfidf</h2>
+<p>TF-IDF &#x4E00;&#x8282;&#x4E2D;&#x4ECB;&#x7ECD;&#x4E86;&#x751F;&#x6210;tfidf&#x7684;&#x65B9;&#x6CD5;, &#x5BF9;&#x751F;&#x6210;&#x7684;&#x7A00;&#x758F;&#x77E9;&#x9635;&#x9001;&#x5165;&#x6A21;&#x578B;</p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> sklearn.cross_validation <span class="hljs-keyword">import</span> train_test_split
+<span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression
+<span class="hljs-comment">#&#x5207;&#x5206;&#x8BAD;&#x7EC3;&#x96C6;&#x4E8E;&#x9A8C;&#x8BC1;&#x96C6;</span>
+X_train, X_validation, y_train, y_validation = train_test_split(X_tv,y_tv,test_size=<span class="hljs-number">0.2</span>)
+lr = LogisticRegression(penalty=<span class="hljs-string">&apos;l1&apos;</span>)
+lr.fit(X_train, y_train)
+pred_train = lr.predict_proba(X_train)[:,<span class="hljs-number">1</span>]
+pred_valid = lr.predict_proba(X_validation)[:,<span class="hljs-number">1</span>]
+train_auc = metrics.roc_auc_score(y_train, pred_train)
+valid_auc =metrics.roc_auc_score(y_validation, pred_valid)
+<span class="hljs-comment">#&#x8F93;&#x51FA;&#x7279;&#x5F81;&#x91CD;&#x8981;&#x6027;</span>
+f = open(<span class="hljs-string">&apos;feature_importance&apos;</span>,<span class="hljs-string">&apos;w+&apos;</span>)
+feature_coef = sorted(zip(features,lr.coef_[<span class="hljs-number">0</span>]), key=<span class="hljs-keyword">lambda</span> x:x[<span class="hljs-number">1</span>], reverse=<span class="hljs-keyword">True</span>)
+<span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> feature_coef:
+    f.write(item[<span class="hljs-number">0</span>].encode(<span class="hljs-string">&apos;utf-8&apos;</span>)+<span class="hljs-string">&apos;,&apos;</span>+str(item[<span class="hljs-number">1</span>])+<span class="hljs-string">&apos;\n&apos;</span>)
+f.close()
+</code></pre>
+<h2 id="&#x5BF9;&#x4E8E;word2vec">&#x5BF9;&#x4E8E;word2vec</h2>
+<p>&#x5BF9;&#x6BCF;&#x4E2A;&#x8BCD;&#xFF0C;&#x505A;&#x4E00;&#x4E2A;&#x8BCD;&#x5411;&#x91CF;&#x6620;&#x5C04;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x6587;&#x6863;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x7684;&#x8BCD;&#x5411;&#x91CF;&#x76F8;&#x52A0;&#xFF0C;&#x4F5C;&#x4E3A;&#x8FD9;&#x4E2A;&#x6587;&#x6863;&#x7684;x</p>
 
                                 
                                 </section>
@@ -352,7 +375,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"next":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"path":"fastText.md","ref":"fastText.md","articles":[]},"previous":{"title":"3.文本分类","level":"1.4","depth":1,"path":"文本分类综述.md","ref":"文本分类综述.md","articles":[{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"path":"fastText.md","ref":"fastText.md","articles":[]},{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},{"title":"3.4 RNN与LSTM分类","level":"1.4.4","depth":2,"path":"RNN与LSTM.md","ref":"RNN与LSTM.md","articles":[]},{"title":"3.5 文本分类的项目","level":"1.4.5","depth":2,"path":"sms.md","ref":"sms.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"逻辑回归.md","mtime":"2018-11-14T06:41:54.063Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-16T09:48:49.144Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"next":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"path":"fastText.md","ref":"fastText.md","articles":[]},"previous":{"title":"3.文本分类","level":"1.4","depth":1,"path":"文本分类综述.md","ref":"文本分类综述.md","articles":[{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"path":"fastText.md","ref":"fastText.md","articles":[]},{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},{"title":"3.4 RNN与LSTM分类","level":"1.4.4","depth":2,"path":"RNN与LSTM.md","ref":"RNN与LSTM.md","articles":[]},{"title":"3.5 文本分类的项目","level":"1.4.5","depth":2,"path":"sms.md","ref":"sms.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"逻辑回归.md","mtime":"2018-11-23T03:16:13.968Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-23T12:03:34.830Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -360,10 +383,6 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>

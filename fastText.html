@@ -308,7 +308,113 @@
     
                                 <section class="normal markdown-section">
                                 
-                                
+                                <h1 id="32-fasttext&#x5206;&#x7C7B;">3.2 fastText&#x5206;&#x7C7B;</h1>
+<p>&#x8BE5;<a href="https://arxiv.org/pdf/1607.01759v3.pdf" target="_blank">&#x7B97;&#x6CD5;</a>&#x7531;facebook &#x5728;2016&#x5E74;&#x5F00;&#x6E90;&#xFF0C;&#x4E5F;&#x662F;word2vec&#x4F5C;&#x8005;&#x5199;&#x7684;&#xFF0C; &#x5178;&#x578B;&#x5E94;&#x7528;&#x573A;&#x666F;&#x662F;&#x5E26;&#x76D1;&#x7763;&#x7684;&#x6587;&#x672C;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#x3002;</p>
+<p>&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x8BB2;&#x4E86;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6709;&#x6548;&#x7684;&#x6587;&#x672C;&#x5206;&#x7C7B;&#x7684;baseline&#xFF0C; &#x4E0E;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x5206;&#x7C7B;&#x5728;&#x51C6;&#x786E;&#x6027;&#x4E0A;&#x76F8;&#x5F53;&#xFF0C;&#x5E76;&#x4E14;&#x5FEB;&#x5EA6;&#x591A;&#x4E2A;&#x6570;&#x91CF;&#x7EA7;&#x3002;
+&#x7528;&#x591A;&#x6838;CPU&#xFF0C; &#x53EF;&#x4EE5;10&#x5206;&#x949F;&#x5185;&#x8BAD;&#x7EC3;&#x8D85;&#x8FC7;10&#x4EBF;&#x8BCD;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x4E0D;&#x5230;1&#x5206;&#x949F;&#x5185;&#xFF0C;&#x5C06;312K&#x4E2A;&#x7C7B;&#x4E2D;&#x7684;50&#x4E07;&#x4E2A;&#x53E5;&#x5B50;&#x5206;&#x7C7B;&#x3002;</p>
+<h2 id="321-&#x6A21;&#x578B;&#x7ED3;&#x6784;">3.2.1 &#x6A21;&#x578B;&#x7ED3;&#x6784;</h2>
+<p>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6709;&#x6548;&#x7684;&#x53E5;&#x5B50;&#x5206;&#x7C7B;&#x65B9;&#x6CD5;&#x662F;&#x7528;&#x78C1;&#x5E26;&#x6A21;&#x578B;&#xFF0C;&#x8BAD;&#x7EC3;&#x4E00;&#x4E2A;&#x7EBF;&#x6027;&#x5206;&#x7C7B;&#x5668;, &#x4F8B;&#x5982;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#xFF0C;&#x652F;&#x6301;&#x5411;&#x91CF;&#x673A;&#x3002;&#x7136;&#x800C;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#x4E0D;&#x80FD;&#x591F;&#x5728;&#x7279;&#x5F81;&#x4E0E;label&#x4E4B;&#x95F4;&#x5206;&#x4EAB;&#x53C2;&#x6570;&#x3002;
+&#x8FD9;&#x53EF;&#x80FD;&#x9650;&#x5236;&#x4ED6;&#x4EEC;&#x7684;&#x6CDB;&#x5316;&#x5728;&#x5927;&#x7684;&#x8F93;&#x51FA;&#x7A7A;&#x95F4;&#x4E0A;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x6709;&#x4E9B;&#x7C7B;&#x7684;&#x6837;&#x672C;&#x5F88;&#x5C11;&#x3002;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x901A;&#x5E38;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x628A;&#x7EBF;&#x6027;&#x5206;&#x7C7B;&#x5668;&#x8FDB;&#x884C;&#x56E0;&#x5F0F;&#x5206;&#x89E3; (Schutze, 1992;
+Mikolov et al., 2013)&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x591A;&#x5C42;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3002;</p>
+<p>&#x4E0B;&#x56FE;&#x5C55;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x5E26;&#x6709;&#x79E9;&#x7EA6;&#x675F;&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#x7ED3;&#x6784;
+<img src="img/fastTextModel.png" alt="fastTestModel">
+x1-xN &#x4E3A;&#x6A21;&#x578B;N ngram&#x7279;&#x5F81;&#xFF0C;&#x7528;embedding&#x8868;&#x793A;&#x540E;&#xFF0C;&#x6C42;&#x5E73;&#x5747;&#x503C;&#x4F5C;&#x4E3A;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x7136;&#x540E;&#x7528;softmax&#x8F93;&#x51FA;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x6982;&#x7387;
+&#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4E0E;2013&#x7684;word2vec&#x7684;CBOW&#x7684;&#x533A;&#x522B;&#x662F; &#x4E2D;&#x95F4;&#x7684;&#x8BCD;&#x88AB;&#x66FF;&#x6362;&#x6210;label&#x3002;</p>
+<p>&#x6A21;&#x578B;&#x4F18;&#x5316;&#x76EE;&#x6807;(&#x8D1F;&#x7684;&#x5BF9;&#x6570;&#x4F3C;&#x7136;&#x51FD;&#x6570;)&#x5982;&#x4E0B;:
+<img src="img/fastTextLoss.png" alt="fastTextLoss">
+N&#x4E3A;&#x6837;&#x672C;&#x6570;&#xFF0C;xn&#x4E3A;normalized bag of features&#xFF0C; yn&#x4E3A;label&#xFF0C;A&#x3001;B&#x4E3A;&#x6743;&#x91CD;&#x77E9;&#x9635;&#x3002;&#x77E9;&#x9635;&#x53C2;&#x6570;A&#x662F;&#x57FA;&#x4E8E;word&#x7684;look-up table&#xFF0C;&#x4E5F;&#x5C31;&#x662F;A&#x662F;&#x8BCD;&#x7684;embedding&#x5411;&#x91CF;&#x3002;
+Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x662F;&#x5C06;word&#x7684;embedding&#x5411;&#x91CF;&#x627E;&#x5230;&#x540E;&#x76F8;&#x52A0;&#x6216;&#x8005;&#x53D6;&#x5E73;&#x5747;&#xFF0C;&#x5F97;&#x5230;hidden&#x5411;&#x91CF;&#x3002;&#x77E9;&#x9635;&#x53C2;&#x6570;B&#x662F;&#x51FD;&#x6570;f&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x51FD;&#x6570;f&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;f(BAx_n)&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x5206;&#x7C7B;&#x7684;&#x7EBF;&#x6027;&#x51FD;&#x6570;&#x3002;</p>
+<h2 id="322-&#x4E0E;word2vec&#x7684;&#x533A;&#x522B;">3.2.2 &#x4E0E;word2vec&#x7684;&#x533A;&#x522B;</h2>
+<p><strong>&#x76F8;&#x4F3C;&#x7684;&#x5730;&#x65B9;</strong>&#xFF1A;</p>
+<pre><code>1. &#x56FE;&#x6A21;&#x578B;&#x7ED3;&#x6784;&#x5F88;&#x50CF;&#xFF0C;&#x90FD;&#x662F;&#x91C7;&#x7528;embedding&#x5411;&#x91CF;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x5F97;&#x5230;word&#x7684;&#x9690;&#x5411;&#x91CF;&#x8868;&#x8FBE;
+2. &#x90FD;&#x91C7;&#x7528;&#x5F88;&#x591A;&#x76F8;&#x4F3C;&#x7684;&#x4F18;&#x5316;&#x65B9;&#x6CD5;&#xFF0C;&#x6BD4;&#x5982;&#x4F7F;&#x7528;Hierarchical softmax&#x4F18;&#x5316;&#x8BAD;&#x7EC3;&#x548C;&#x9884;&#x6D4B;&#x4E2D;&#x7684;&#x6253;&#x5206;&#x901F;&#x5EA6;&#x3002;
+</code></pre><p><strong>&#x4E0D;&#x540C;&#x7684;&#x5730;&#x65B9;</strong>&#xFF1A;</p>
+<pre><code>1. word2vec&#x662F;&#x4E00;&#x4E2A;&#x65E0;&#x76D1;&#x7763;&#x7B97;&#x6CD5;&#xFF0C;&#x800C;fasttext&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x76D1;&#x7763;&#x7B97;&#x6CD5;&#x3002;word2vec&#x7684;&#x5B66;&#x4E60;&#x76EE;&#x6807;&#x662F;skip&#x7684;word&#xFF0C;&#x800C;fasttext&#x7684;&#x5B66;&#x4E60;&#x76EE;&#x6807;&#x662F;&#x4EBA;&#x5DE5;&#x6807;&#x6CE8;&#x7684;&#x5206;&#x7C7B;&#x7ED3;&#x679C;&#x3002;
+2. word2vec&#x8981;&#x6C42;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x5E26;&#x6709;&#x201C;&#x5E8F;&#x201D;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x800C;fasttext&#x4F7F;&#x7528;&#x7684;&#x662F;bag of words&#x7684;&#x601D;&#x60F3;&#xFF0C;&#x4F7F;&#x7528;&#x7684;&#x662F;n-gram&#x7684;&#x65E0;&#x5E8F;&#x5C5E;&#x6027;&#x3002;
+3. fasttext&#x4F7F;&#x7528;&#x7684;&#x6A21;&#x578B;&#x4E0E;word2vec&#x7684;&#x6A21;&#x578B;&#x5728;&#x7ED3;&#x6784;&#x4E0A;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x62FF;cbow&#x6765;&#x8BF4;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x53EA;&#x662F;&#x5728;&#x4E8E;word2vec cbow&#x7684;&#x76EE;&#x6807;&#x662F;&#x901A;&#x8FC7;&#x5F53;&#x524D;&#x8BCD;&#x7684;&#x524D;&#x540E;N&#x4E2A;&#x8BCD;&#x6765;&#x9884;&#x6D4B;&#x5F53;&#x524D;&#x8BCD;&#xFF0C;&#x5728;&#x4F7F;&#x7528;&#x5C42;&#x6B21;softmax&#x7684;&#x65F6;&#x5019;&#xFF0C;huffman&#x6811;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x5904;&#x662F;&#x8BAD;&#x7EC3;&#x8BED;&#x6599;&#x91CC;&#x6240;&#x6709;&#x8BCD;&#x7684;&#x5411;&#x91CF;
+4. fasttext&#x5728;&#x8FDB;&#x884C;&#x6587;&#x672C;&#x5206;&#x7C7B;&#x65F6;&#xFF0C;huffmax&#x6811;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x5904;&#x662F;&#x6BCF;&#x4E00;&#x4E2A;&#x7C7B;&#x522B;&#x6807;&#x7B7E;, &#x800C;word2vec&#x7684;&#x53F6;&#x5B50;&#x7ED3;&#x70B9;&#xFF0C;&#x4E3A;&#x6240;&#x6709;&#x7684;&#x8BCD;&#x3002;
+5. fasttext&#x6709;&#x522B;&#x4E8E;word2vec&#x7684;&#x53E6;&#x4E00;&#x70B9;&#x662F;&#x52A0;&#x4E86;ngram&#x5207;&#x5206;&#x8FD9;&#x4E2A;trick&#xFF0C;&#x5C06;&#x957F;&#x8BCD;&#x518D;&#x901A;&#x8FC7;ngram&#x5207;&#x5206;&#x4E3A;&#x51E0;&#x4E2A;&#x77ED;&#x8BCD;
+</code></pre><h2 id="323-&#x53C2;&#x6570;&#x65B9;&#x9762;">3.2.3 &#x53C2;&#x6570;&#x65B9;&#x9762;</h2>
+<pre><code>1. loss function&#x9009;&#x7528;hs&#xFF08;hierarchical softmax&#xFF09;&#x8981;&#x6BD4;ns(negative sampling) &#x8BAD;&#x7EC3;&#x901F;&#x5EA6;&#x8981;&#x5FEB;&#x5F88;&#x591A;&#x500D;&#xFF0C;&#x5E76;&#x4E14;&#x51C6;&#x786E;&#x7387;&#x4E5F;&#x66F4;&#x9AD8;&#x3002;
+2. wordNgrams &#x9ED8;&#x8BA4;&#x4E3A;1&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A;2&#x4EE5;&#x4E0A;&#x53EF;&#x4EE5;&#x660E;&#x663E;&#x63D0;&#x9AD8;&#x51C6;&#x786E;&#x7387;&#x3002;
+3. &#x5982;&#x679C;&#x8BCD;&#x6570;&#x4E0D;&#x662F;&#x5F88;&#x591A;&#xFF0C;&#x53EF;&#x4EE5;&#x628A;bucket&#x8BBE;&#x7F6E;&#x7684;&#x5C0F;&#x4E00;&#x70B9;&#xFF0C;&#x5426;&#x5219;&#x9884;&#x7559;&#x4F1A;&#x9884;&#x7559;&#x592A;&#x591A;bucket&#x4F7F;&#x6A21;&#x578B;&#x592A;&#x5927;&#x3002;
+</code></pre><h2 id="324-&#x4EE3;&#x7801;&#x793A;&#x4F8B;">3.2.4 &#x4EE3;&#x7801;&#x793A;&#x4F8B;</h2>
+<h4 id="&#x8BCD;&#x5411;&#x91CF;&#x5B66;&#x4E60;">&#x8BCD;&#x5411;&#x91CF;&#x5B66;&#x4E60;</h4>
+<pre><code class="lang-powershell">./fasttext skipgram -input data.txt -output model
+</code></pre>
+<p>data.txt&#x662F;utf8&#x7F16;&#x7801;&#x7684;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;n-grams&#x662F;3&#x5230;6&#x3002;&#x8F93;&#x51FA;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;model.bin, model.vec&#x5305;&#x542B;&#x8BCD;&#x5411;&#x91CF;&#xFF0C;&#x4E00;&#x884C;&#x4E00;&#x4E2A;&#x8BCD;&#x3002;model.bin&#x662F;&#x4E00;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x542B;&#x6A21;&#x578B;&#x7684;&#x53C2;&#x6570;&#x3001;&#x5B57;&#x5178;&#x3001;&#x548C;&#x8D85;&#x53C2;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x4E4B;&#x540E;&#x8BA1;&#x7B97;&#x8BCD;&#x5411;&#x91CF;&#x6216;&#x8005;&#x91CD;&#x65B0;&#x4F18;&#x5316;&#x3002;</p>
+<h4 id="&#x83B7;&#x5F97;&#x8BCD;&#x6C47;&#x8868;&#x5916;&#x7684;&#x8BCD;&#x5411;&#x91CF;">&#x83B7;&#x5F97;&#x8BCD;&#x6C47;&#x8868;&#x5916;&#x7684;&#x8BCD;&#x5411;&#x91CF;</h4>
+<p>&#x7528;&#x4E4B;&#x524D;&#x8BAD;&#x7EC3;&#x7684;&#x6A21;&#x578B; &#x53BB;&#x8BA1;&#x7B97;&#x8BCD;&#x6C47;&#x8868;&#x4E4B;&#x5916;&#x7684;&#x8BCD;&#x5411;&#x91CF;&#x3002;&#x8F93;&#x5165;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x4F60;&#x60F3;&#x8981;&#x8BA1;&#x7B97;&#x7684;&#x8BCD;&#x7684;&#x6587;&#x4EF6; queries.txt&#x3002;&#x7528;&#x4E0B;&#x9762;&#x8FD9;&#x6761;&#x547D;&#x4EE4;</p>
+<pre><code class="lang-powershell">./fasttext print-word-vectors model.bin &lt; queries.txt
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x662F;&#x6BCF;&#x884C;&#x4E00;&#x4E2A;&#x8BCD;&#x5411;&#x91CF;,&#x4E5F;&#x53EF;&#x4EE5;&#x7528;pipes&#x7684;&#x5F62;&#x5F0F;</p>
+<pre><code class="lang-powershell">cat queries.txt | ./fasttext print-word-vectors model.bin
+</code></pre>
+<h4 id="&#x6587;&#x672C;&#x5206;&#x7C7B;">&#x6587;&#x672C;&#x5206;&#x7C7B;</h4>
+<p>&#x8FD9;&#x4E2A;library&#x80FD;&#x591F;&#x8BAD;&#x7EC3;&#x4E00;&#x4E2A;&#x6709;&#x76D1;&#x7763;&#x7684;&#x6587;&#x672C;&#x5206;&#x7C7B;</p>
+<pre><code class="lang-powershell">./fasttext supervised -input train.txt -output model
+</code></pre>
+<p>train.txt &#x662F;&#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x6BCF;&#x884C;&#x5305;&#x542B;&#x5206;&#x8BCD;&#x540E;&#x7684;&#x6587;&#x672C;&#xFF0C;&#x4E0E;label&#xFF0C; label&#x9ED8;&#x8BA4;&#x524D;&#x7F00;&#x4E3A; <code>__label__</code>&#x3002;&#x8F93;&#x51FA;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x4E3A;: model.bin &#x548C;model.vec&#x3002;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x6D4B;&#x8BD5;&#x96C6;&#x4E0A;&#x8BA1;&#x7B97; precision&#x548C;recall at k(P@k and R@k)</p>
+<pre><code class="lang-powershell">./fasttext test model.bin test.txt k
+</code></pre>
+<p>&#x6216;&#x8005;&#x5728;&#x6BCF;&#x4E00;&#x4E2A;label&#x4E0A;&#xFF0C;&#x9884;&#x6D4B;&#x6700;&#x53EF;&#x80FD;&#x7684;k&#x4E2A;&#x7C7B;&#x522B;</p>
+<pre><code class="lang-powershell">./fasttext predict model.bin test.txt k
+</code></pre>
+<p>&#x6216;&#x8005;&#x9884;&#x6D4B;&#x524D;k&#x7C7B;&#x7684;&#x6982;&#x7387;</p>
+<pre><code class="lang-powershell">./fasttext predict-prob model.bin test.txt k
+</code></pre>
+<p>k&#x662F;&#x53EF;&#x9009;&#x7684;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;1&#x3002;</p>
+<p>&#x5982;&#x679C;&#x60F3;&#x8BA1;&#x7B97;&#x4E00;&#x53E5;&#x8BDD;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x6BB5;&#x843D;&#x7684;&#x5411;&#x91CF;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E0B;&#x547D;&#x4EE4;</p>
+<pre><code class="lang-powershell">./fasttext print-sentence-vectors model.bin &lt; text.txt
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x662F;&#x6BCF;&#x4E00;&#x884C;&#x4E00;&#x4E2A;&#x5411;&#x91CF;.</p>
+<p>&#x5982;&#x679C;&#x6A21;&#x578B;&#x6587;&#x4EF6;&#x5F88;&#x5927;&#xFF0C;&#x53EF;&#x4EE5;quantize&#x8FDB;&#x884C;&#x538B;&#x7F29;&#xFF0C;&#x53EF;&#x4EE5;&#x51CF;&#x5C0F;&#x5185;&#x5B58;&#x4F7F;&#x7528;</p>
+<pre><code class="lang-powershell">./fasttext quantize -output model
+</code></pre>
+<p>github&#x4E0A;&#x6CA1;&#x6709;&#x7ED9;&#x51FA;&#x8F93;&#x5165;&#xFF0C;&#x53C2;&#x8003;<a href="https://fasttext.cc/blog/2017/10/02/blog-post.html" target="_blank">Language identification</a>&#xFF0C;&#x6709;&#x4E00;&#x884C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF0C;&#x8F93;&#x51FA;&#x8FD8;&#x662F;&#x8BAD;&#x7EC3;&#x6837;&#x672C;</p>
+<pre><code class="lang-powershell">./fasttext quantize -input train.txt -output model -qnorm -cutoff <span class="hljs-number">50000</span> -retrain
+</code></pre>
+<p>&#x8F93;&#x51FA;&#x662F;model.ftz, &#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x4E2D;&#x7684;350M&#x7684;&#x6A21;&#x578B;&#x6587;&#x4EF6;&#x538B;&#x7F29;&#x5230;1M&#x4EE5;&#x5185;&#xFF0C;&#x539F;&#x7406;&#x53EF;&#x53C2;&#x8003;<a href="https://fasttext.cc/blog/2017/10/02/blog-post.html" target="_blank">Language identification</a>&#x3002;&#x50CF;&#x4E4B;&#x524D;&#x7684;&#x6A21;&#x578B;&#x4E00;&#x6837;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x538B;&#x7F29;&#x540E;&#x7684;&#x6A21;&#x578B;&#x6765;<code>test</code> &#x6216;&#x8005; <code>predict</code>&#x3002;</p>
+<pre><code class="lang-powershell">./fasttext test model.ftz test.txt
+</code></pre>
+<h4 id="python&#x4EE3;&#x7801;">python&#x4EE3;&#x7801;</h4>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">from</span> fastText <span class="hljs-keyword">import</span> train_supervised
+
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print_results</span><span class="hljs-params">(N, p, r)</span>:</span>
+    print(<span class="hljs-string">&quot;N\t&quot;</span> + str(N))
+    print(<span class="hljs-string">&quot;P@{}\t{:.3f}&quot;</span>.format(<span class="hljs-number">1</span>, p))
+    print(<span class="hljs-string">&quot;R@{}\t{:.3f}&quot;</span>.format(<span class="hljs-number">1</span>, r))
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
+    train_data = os.path.join(os.getenv(<span class="hljs-string">&quot;DATADIR&quot;</span>, <span class="hljs-string">&apos;&apos;</span>), <span class="hljs-string">&apos;cooking.train&apos;</span>)
+    valid_data = os.path.join(os.getenv(<span class="hljs-string">&quot;DATADIR&quot;</span>, <span class="hljs-string">&apos;&apos;</span>), <span class="hljs-string">&apos;cooking.valid&apos;</span>)
+
+    <span class="hljs-comment"># train_supervised uses the same arguments and defaults as the fastText cli</span>
+    model = train_supervised(
+        input=train_data, epoch=<span class="hljs-number">25</span>, lr=<span class="hljs-number">1.0</span>, wordNgrams=<span class="hljs-number">2</span>, verbose=<span class="hljs-number">2</span>, minCount=<span class="hljs-number">1</span>
+    )
+    print_results(*model.test(valid_data))
+
+    model = train_supervised(
+        input=train_data, epoch=<span class="hljs-number">25</span>, lr=<span class="hljs-number">1.0</span>, wordNgrams=<span class="hljs-number">2</span>, verbose=<span class="hljs-number">2</span>, minCount=<span class="hljs-number">1</span>,
+        loss=<span class="hljs-string">&quot;hs&quot;</span>
+    )
+    print_results(*model.test(valid_data))
+    model.save_model(<span class="hljs-string">&quot;cooking.bin&quot;</span>)
+
+    model.quantize(input=train_data, qnorm=<span class="hljs-keyword">True</span>, retrain=<span class="hljs-keyword">True</span>, cutoff=<span class="hljs-number">100000</span>)
+    print_results(*model.test(valid_data))
+    model.save_model(<span class="hljs-string">&quot;cooking.ftz&quot;</span>)
+</code></pre>
+<h6 id="&#x53C2;&#x8003;&#x6587;&#x732E;">&#x53C2;&#x8003;&#x6587;&#x732E;</h6>
+<ol>
+<li><a href="https://arxiv.org/pdf/1607.01759v3.pdf" target="_blank">Bag of Tricks for Efficient Text Classification</a></li>
+<li><a href="https://github.com/facebookresearch/fastText" target="_blank">&#x5F00;&#x6E90;&#x4EE3;&#x7801;</a></li>
+<li><a href="https://www.cnblogs.com/DjangoBlog/p/7904039.html" target="_blank">FastText &#x6587;&#x672C;&#x5206;&#x7C7B;&#x4F7F;&#x7528;&#x5FC3;&#x5F97;</a></li>
+</ol>
+
                                 
                                 </section>
                             
@@ -351,7 +457,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"next":{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},"previous":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},"dir":"neutral"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fastText.md","mtime":"2018-11-15T12:07:17.538Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-16T09:48:49.144Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"next":{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},"previous":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fastText.md","mtime":"2018-11-23T12:02:44.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-23T12:03:34.830Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -359,10 +465,6 @@
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
-    
-        
-        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
