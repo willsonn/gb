@@ -317,13 +317,22 @@
 &#x8FD9;&#x53EF;&#x80FD;&#x9650;&#x5236;&#x4ED6;&#x4EEC;&#x7684;&#x6CDB;&#x5316;&#x5728;&#x5927;&#x7684;&#x8F93;&#x51FA;&#x7A7A;&#x95F4;&#x4E0A;&#xFF0C;&#x5C24;&#x5176;&#x662F;&#x6709;&#x4E9B;&#x7C7B;&#x7684;&#x6837;&#x672C;&#x5F88;&#x5C11;&#x3002;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x901A;&#x5E38;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x628A;&#x7EBF;&#x6027;&#x5206;&#x7C7B;&#x5668;&#x8FDB;&#x884C;&#x56E0;&#x5F0F;&#x5206;&#x89E3; (Schutze, 1992;
 Mikolov et al., 2013)&#xFF0C;&#x6216;&#x8005;&#x4F7F;&#x7528;&#x591A;&#x5C42;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3002;</p>
 <p>&#x4E0B;&#x56FE;&#x5C55;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x5E26;&#x6709;&#x79E9;&#x7EA6;&#x675F;&#x7B80;&#x5355;&#x7EBF;&#x6027;&#x6A21;&#x578B;&#x7ED3;&#x6784;
-<img src="img/fastTextModel.png" alt="fastTestModel">
-x1-xN &#x4E3A;&#x6A21;&#x578B;N ngram&#x7279;&#x5F81;&#xFF0C;&#x7528;embedding&#x8868;&#x793A;&#x540E;&#xFF0C;&#x6C42;&#x5E73;&#x5747;&#x503C;&#x4F5C;&#x4E3A;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x7136;&#x540E;&#x7528;softmax&#x8F93;&#x51FA;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x6982;&#x7387;
+<img src="img/fastTextModel.png" alt="fastTestModel"></p>
+<p>x1-xN &#x4E3A;&#x6A21;&#x578B;N ngram&#x7279;&#x5F81;&#xFF0C;&#x7528;embedding&#x8868;&#x793A;&#x540E;&#xFF0C;&#x6C42;&#x5E73;&#x5747;&#x503C;&#x4F5C;&#x4E3A;&#x9690;&#x85CF;&#x5C42;&#xFF0C;&#x7136;&#x540E;&#x7528;softmax&#x8F93;&#x51FA;&#x6BCF;&#x4E2A;&#x7C7B;&#x522B;&#x7684;&#x6982;&#x7387;
 &#x8FD9;&#x4E2A;&#x7ED3;&#x6784;&#x4E0E;2013&#x7684;word2vec&#x7684;CBOW&#x7684;&#x533A;&#x522B;&#x662F; &#x4E2D;&#x95F4;&#x7684;&#x8BCD;&#x88AB;&#x66FF;&#x6362;&#x6210;label&#x3002;</p>
 <p>&#x6A21;&#x578B;&#x4F18;&#x5316;&#x76EE;&#x6807;(&#x8D1F;&#x7684;&#x5BF9;&#x6570;&#x4F3C;&#x7136;&#x51FD;&#x6570;)&#x5982;&#x4E0B;:
-<img src="img/fastTextLoss.png" alt="fastTextLoss">
-N&#x4E3A;&#x6837;&#x672C;&#x6570;&#xFF0C;xn&#x4E3A;normalized bag of features&#xFF0C; yn&#x4E3A;label&#xFF0C;A&#x3001;B&#x4E3A;&#x6743;&#x91CD;&#x77E9;&#x9635;&#x3002;&#x77E9;&#x9635;&#x53C2;&#x6570;A&#x662F;&#x57FA;&#x4E8E;word&#x7684;look-up table&#xFF0C;&#x4E5F;&#x5C31;&#x662F;A&#x662F;&#x8BCD;&#x7684;embedding&#x5411;&#x91CF;&#x3002;
+<img src="img/fastTextLoss.png" alt="fastTextLoss"></p>
+<p>N&#x4E3A;&#x6837;&#x672C;&#x6570;&#xFF0C;xn&#x4E3A;normalized bag of features&#xFF0C; yn&#x4E3A;label&#xFF0C;A&#x3001;B&#x4E3A;&#x6743;&#x91CD;&#x77E9;&#x9635;&#x3002;&#x77E9;&#x9635;&#x53C2;&#x6570;A&#x662F;&#x57FA;&#x4E8E;word&#x7684;look-up table&#xFF0C;&#x4E5F;&#x5C31;&#x662F;A&#x662F;&#x8BCD;&#x7684;embedding&#x5411;&#x91CF;&#x3002;
 Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x662F;&#x5C06;word&#x7684;embedding&#x5411;&#x91CF;&#x627E;&#x5230;&#x540E;&#x76F8;&#x52A0;&#x6216;&#x8005;&#x53D6;&#x5E73;&#x5747;&#xFF0C;&#x5F97;&#x5230;hidden&#x5411;&#x91CF;&#x3002;&#x77E9;&#x9635;&#x53C2;&#x6570;B&#x662F;&#x51FD;&#x6570;f&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x51FD;&#x6570;f&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;f(BAx_n)&#x662F;&#x4E00;&#x4E2A;&#x591A;&#x5206;&#x7C7B;&#x7684;&#x7EBF;&#x6027;&#x51FD;&#x6570;&#x3002;</p>
+<h4 id="lookup-table&#x662F;&#x4EC0;&#x4E48;">lookup table&#x662F;&#x4EC0;&#x4E48;</h4>
+<p>lookup table &#x5176;&#x5B9E;&#x5C31;&#x662F;&#x5168;&#x8FDE;&#x63A5;&#x7684;&#x6743;&#x91CD;&#x77E9;&#x9635; <strong><em>W</em></strong>.&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x5047;&#x8BBE;&#x6709; <strong><em>M</em></strong> &#x4E2A;&#x6587;&#x6863;,&#x8BCD;&#x5178;&#x5927;&#x5C0F;&#x4E3A; <strong><em>V</em></strong> ,&#x6211;&#x4EEC;&#x91C7;&#x7528;&#x8BCD;&#x888B;&#x6A21;&#x578B;&#x8F93;&#x5165;sample   &#x7684;&#x7EF4;&#x5EA6;&#x5C31;&#x662F; <strong><em>M</em></strong> <em> <strong><em>V</em></strong> &#x7684;,&#x6CE8;&#x610F;&#x5230;&#x8F93;&#x5165;&#x7684;&#x6BCF;&#x4E00;&#x884C;&#x662F;&#x7A00;&#x758F;&#x8868;&#x793A;&#x7684;,&#x6709;&#x5927;&#x91CF;&#x7684;0.&#x6211;&#x4EEC;&#x5047;&#x8BBE; <strong><em>W</em></strong> &#x7684;&#x7EF4;&#x5EA6;&#x662F;&#x662F; <strong><em>V</em></strong> </em> <strong><em>K</em></strong> ,&#x90A3;&#x4E48;&#x672C;&#x6765;&#x6211;&#x4EEC;&#x8BA1;&#x7B97; <strong><em>X</em></strong> <em> <strong><em>W</em></strong> &#x662F;&#x9700;&#x8981;&#x6309;&#x7167;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x9010;&#x4E2A;&#x8BA1;&#x7B97;&#x7684;,&#x4F46;&#x662F;&#x5229;&#x7528; <em>*<em>X</em></em></em> &#x7684;&#x6BCF;&#x4E00;&#x884C;&#x5411;&#x91CF;&#x6709;&#x5927;&#x91CF;&#x7684;0&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x5411;&#x91CF;&#x76F8;&#x52A0;&#x6765;&#x7B80;&#x5316;&#x8BA1;&#x7B97;.</p>
+<p>&#x4E3A;&#x4E86;&#x65B9;&#x4FBF;&#x8BF4;&#x660E;,&#x6211;&#x4EEC;&#x4E3E;&#x4E00;&#x4E2A;&#x5177;&#x4F53;&#x7684;&#x4F8B;&#x5B50;.&#x8FD9;&#x91CC;&#x5047;&#x8BBE; 
+<img src="img/3_fastText_w.svg" alt="w"></p>
+<p>&#x73B0;&#x5728;&#x9700;&#x8981;&#x6C42; <strong><em>Z = XW</em></strong> ,&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x73B0;&#x5728;&#x9700;&#x8981;&#x8BA1;&#x7B97;<strong><em>Z</em></strong>&#x7684;&#x7B2C;&#x4E00;&#x884C; <strong><em>Z[0]</em></strong> ,&#x7ED3;&#x679C;&#x4E3A;</p>
+<p><img src="img/3_fastText_z.svg" alt="X"></p>
+<p><img src="img/3_fastText_result.svg" alt="result">
+<img src="img/3_fastText_result2.svg" alt="result2"></p>
+<p>&#x5176;&#x5B9E;&#x6211;&#x4EEC;&#x53D1;&#x73B0;,&#x8981;&#x8BA1;&#x7B97;<strong><em>Z[i]</em></strong>(&#x8868;&#x793A; <strong><em>Z</em></strong> &#x7684;&#x7B2C; <strong><em>i</em></strong> &#x884C;)  &#x6211;&#x4EEC;&#x6839;&#x672C;&#x4E0D;&#x9700;&#x8981;&#x76F4;&#x63A5;&#x6309;&#x7167;&#x77E9;&#x9635;&#x7684;&#x4E58;&#x6CD5;,&#x800C;&#x662F;&#x770B;  &#x54EA;&#x4E9B;&#x5217;&#x662F;1,&#x7136;&#x540E;&#x76F4;&#x63A5;&#x5728; <strong><em>W</em></strong> &#x4E2D;&#x5C06;&#x5BF9;&#x5E94;&#x7684;&#x884C;&#x5411;&#x91CF;&#x76F8;&#x52A0;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;.&#x8FD9;&#x6837;&#x505A;&#x52A0;&#x6CD5;&#x663E;&#x7136;&#x6BD4;&#x539F;&#x6765;&#x5411;&#x91CF;&#x505A;&#x70B9;&#x79EF;&#x6548;&#x7387;&#x8981;&#x9AD8;&#x5F88;&#x591A;.&#x5176;&#x5B9E;&#x8FD9;&#x91CC;&#x7684;&#x672C;&#x8D28;&#x8FD8;&#x662F;&#x5229;&#x7528;&#x4E86; <strong><em>X</em></strong> &#x7684;&#x6BCF;&#x4E00;&#x884C;&#x5411;&#x91CF;&#x662F;&#x7A00;&#x758F;&#x8868;&#x793A;&#x7684;,&#x6709;&#x5927;&#x91CF;&#x7684;0,&#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x8BA1;&#x7B97;.&#x53E6;&#x5916;&#x8BF4;&#x4E00;&#x53E5;,&#x8FD9;&#x91CC; <strong><em>W</em></strong> &#x7684;&#x542B;&#x4E49;&#x5C31;&#x662F;&#x7B2C; <strong><em>i</em></strong> &#x884C;&#x662F;&#x539F;&#x59CB;&#x7B2C; <strong><em>i</em></strong> &#x4E2A;&#x5355;&#x8BCD;&#x7684;&#x8BCD;&#x5411;&#x91CF;, <strong><em>Z</em></strong> &#x7684;&#x542B;&#x4E49;&#x5C31;&#x662F;&#x7B2C; <strong><em>i</em></strong> &#x884C;&#x662F;&#x7B2C; <strong><em>i</em></strong> &#x4E2A;&#x6587;&#x6863;&#x7684;&#x8BCD;&#x5411;&#x91CF;&#x8868;&#x793A;.</p>
 <h2 id="322-&#x4E0E;word2vec&#x7684;&#x533A;&#x522B;">3.2.2 &#x4E0E;word2vec&#x7684;&#x533A;&#x522B;</h2>
 <p><strong>&#x76F8;&#x4F3C;&#x7684;&#x5730;&#x65B9;</strong>&#xFF1A;</p>
 <pre><code>1. &#x56FE;&#x6A21;&#x578B;&#x7ED3;&#x6784;&#x5F88;&#x50CF;&#xFF0C;&#x90FD;&#x662F;&#x91C7;&#x7528;embedding&#x5411;&#x91CF;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x5F97;&#x5230;word&#x7684;&#x9690;&#x5411;&#x91CF;&#x8868;&#x8FBE;
@@ -381,7 +390,6 @@ Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x6
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> fastText <span class="hljs-keyword">import</span> train_supervised
 
-
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">print_results</span><span class="hljs-params">(N, p, r)</span>:</span>
     print(<span class="hljs-string">&quot;N\t&quot;</span> + str(N))
     print(<span class="hljs-string">&quot;P@{}\t{:.3f}&quot;</span>.format(<span class="hljs-number">1</span>, p))
@@ -408,11 +416,12 @@ Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x6
     print_results(*model.test(valid_data))
     model.save_model(<span class="hljs-string">&quot;cooking.ftz&quot;</span>)
 </code></pre>
-<h6 id="&#x53C2;&#x8003;&#x6587;&#x732E;">&#x53C2;&#x8003;&#x6587;&#x732E;</h6>
+<h6 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h6>
 <ol>
 <li><a href="https://arxiv.org/pdf/1607.01759v3.pdf" target="_blank">Bag of Tricks for Efficient Text Classification</a></li>
 <li><a href="https://github.com/facebookresearch/fastText" target="_blank">&#x5F00;&#x6E90;&#x4EE3;&#x7801;</a></li>
 <li><a href="https://www.cnblogs.com/DjangoBlog/p/7904039.html" target="_blank">FastText &#x6587;&#x672C;&#x5206;&#x7C7B;&#x4F7F;&#x7528;&#x5FC3;&#x5F97;</a></li>
+<li><a href="https://www.zhihu.com/question/61780787" target="_blank">&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x5904;&#x7406;&#x4E2D;&#x7684;lookup table&#x662F;&#x4EC0;&#x4E48;?</a></li>
 </ol>
 
                                 
@@ -457,7 +466,7 @@ Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x6
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"next":{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},"previous":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fastText.md","mtime":"2018-11-23T12:02:44.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-23T12:03:34.830Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.2 fastText分类","level":"1.4.2","depth":2,"next":{"title":"3.3 CNN分类","level":"1.4.3","depth":2,"path":"CNN.md","ref":"CNN.md","articles":[]},"previous":{"title":"3.1 逻辑回归分类","level":"1.4.1","depth":2,"path":"逻辑回归.md","ref":"逻辑回归.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"fastText.md","mtime":"2018-11-27T04:16:05.387Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-29T02:35:25.435Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -465,6 +474,10 @@ Ax_n&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x7684;&#x6570;&#x5B66;&#x610F;&#x4E49;&#x6
         
     <script src="gitbook/gitbook.js"></script>
     <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
     
         
         <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
